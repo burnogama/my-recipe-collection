@@ -9,6 +9,7 @@ async function initDB() {
     console.log("Hora atual no banco de dados:", response.rows[0].now);
 }
 
-initDB();
-
-module.exports = pool;
+module.exports = {
+    pool,
+    initDB,
+};

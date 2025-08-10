@@ -1,7 +1,7 @@
 require("dotenv").config();
 const fs = require("fs");
 const path = require("path");
-const pool = require("../config/initDB");
+const { pool } = require("../config/initDB");
 
 const migrationsDir = path.join(__dirname, "..", "migrations");
 
