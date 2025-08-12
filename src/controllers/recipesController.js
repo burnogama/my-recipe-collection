@@ -1,5 +1,5 @@
 const controller = require("../utils/controllerHelper.js");
-const service = require("../services/recipesService.js");
+const service = require("../services/recipes/recipesService.js");
 const { validateFound } = require("../utils/validationHelper.js");
 
 const requiredFields = ["name", "yield_amount", "cost_price"];

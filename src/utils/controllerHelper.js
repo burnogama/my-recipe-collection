@@ -1,4 +1,4 @@
-const service = require("../services/recipesService.js");
+const service = require("../services/recipes/recipesService.js");
 const { validateRequiredFields } = require("../utils/validationHelper.js");
 
 function sendResponse(res, status, data) {

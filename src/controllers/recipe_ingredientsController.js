@@ -1,5 +1,5 @@
 const { validateRequiredFields, validateFound } = require("../utils/validationHelper.js");
-const riServices = require("../services/recipe_ingredientsService.js");
+const riServices = require("../services/recipe_ingredients/recipe_ingredientsService.js");
 const { sendResponse } = require("../utils/controllerHelper.js");
 
 const requiredFields = ["quantity", "unit"];

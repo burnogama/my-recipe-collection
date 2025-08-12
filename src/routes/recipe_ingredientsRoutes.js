@@ -4,16 +4,26 @@ const controller = require("../controllers/recipe_ingredientsController.js");
 
 const route = express.Router();
 
+//Rotas mais específicas
+
+//SEARCH recipes by name
+route.get("recipe-ingredients/search-by-recipe", tryCatch());
+
+//SEARCH ingredients by name
+route.get("/recipe-ingredients/search-by-ingredient", tryCatch());
+
+//CRUD Básico
+
 //POST
-route.post("/recipe_ingredients", tryCatch(controller.insertOneController));
+route.post("/recipe-ingredients", tryCatch(controller.insertOneController));
 
 //GET/:id
-route.get("/recipe_ingredients/:id", tryCatch(controller.getIngredientsByRecipeController));
+route.get("/recipe-ingredients/:id", tryCatch(controller.getIngredientsByRecipeController));
 
 //PATCH/:id
-route.patch("/recipe_ingredients/:recipeId/:ingredientId", tryCatch(controller.updateOneRecipeIngredientController));
+route.patch("/recipe-ingredients/:recipeId/:ingredientId", tryCatch(controller.updateOneRecipeIngredientController));
 
 //DELETE/:id
-route.delete("/recipe_ingredients/:recipeId/:ingredientId", tryCatch(controller.deleteOneRecipeIngredientController));
+route.delete("/recipe-ingredients/:recipeId/:ingredientId", tryCatch(controller.deleteOneRecipeIngredientController));
 
 module.exports = route;
