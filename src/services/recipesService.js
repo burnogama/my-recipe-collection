@@ -7,9 +7,17 @@ const QUERY = {
     getOne: "SELECT * FROM recipes WHERE id = $1",
     update: "UPDATE recipes SET name = $1, description = $2, yield_amount = $3, cost_price = $4, instructions = $5, notes = $6 WHERE id = $7 RETURNING *",
     delete: "DELETE FROM recipes WHERE id = $1 RETURNING *",
+    searchbyName: "SELECT * FROM recipes WHERE name ILIKE $1", //ILIKE = case-insensitive, SEARCH FOR EVERYTHING THAT MATCHES THE PARAM.
 };
 
 const bodyValues = ["name", "description", "yield_amount", "cost_price", "instructions", "notes"];
+
+//Rotas específicas
+function searchRecipeByName(nameArray) {
+    return serviceHelper.getAllService(QUERY.searchbyName, nameArray);
+}
+
+//CRUD Básico
 
 //POST
 function createRecipe(body) {
@@ -42,4 +50,5 @@ module.exports = {
     getRecipeById,
     updateOneRecipe,
     deleteOneRecipe,
+    searchRecipeByName,
 };

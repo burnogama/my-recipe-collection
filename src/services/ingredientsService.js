@@ -7,10 +7,16 @@ const QUERY = {
     getOne: "SELECT * FROM ingredients WHERE id = $1",
     update: "UPDATE ingredients SET name = $1, unit = $2, unit_price = $3 WHERE id = $4 RETURNING *",
     delete: "DELETE FROM ingredients WHERE id = $1 RETURNING *",
+    searchByName: "SELECT * FROM ingredients WHERE name ILIKE $1",
 };
 
 //Extract row values from the table
 const bodyValues = ["name", "unit_price", "unit"];
+
+//SEARCH by name
+function searchIngredientByName(nameArray) {
+    return serviceHelper.getAllService(QUERY.searchByName, nameArray);
+}
 
 //POST
 function createIngredient(body) {
@@ -43,4 +49,5 @@ module.exports = {
     getOneIngredient,
     updateOneIngredient,
     deleteOneIngredient,
+    searchIngredientByName,
 };

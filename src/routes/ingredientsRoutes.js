@@ -5,6 +5,11 @@ const route = express.Router();
 
 const controller = require("../controllers/ingredientsController.js");
 
+//Rotas específicas
+route.get("/ingredients/search", tryCatch(controller.getIngredientByNameController));
+
+//CRUD Básico
+
 //POST
 route.post("/ingredients", tryCatch(controller.createIngredientController));
 

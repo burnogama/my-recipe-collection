@@ -7,8 +7,8 @@ async function insertService(querySql, data) {
 }
 
 //READ all
-async function getAllService(querySql) {
-    const res = await pool.query(querySql);
+async function getAllService(querySql, params = []) {
+    const res = await pool.query(querySql, params);
     return res.rows;
 }
 

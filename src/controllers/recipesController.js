@@ -4,6 +4,13 @@ const { validateFound } = require("../utils/validationHelper.js");
 
 const requiredFields = ["name", "yield_amount", "cost_price"];
 
+//SEARCH by name
+async function searchRecipeByNameController(req, res) {
+    const name = `%${req.query.name}%`;
+    const response = await controller.getAllController(service.searchRecipeByName, [name]);
+    controller.sendResponse(res, 200, response);
+}
+
 //POST
 async function createRecipeController(req, res) {
     const response = await controller.insertController(req.body, service.createRecipe, requiredFields);
@@ -48,4 +55,5 @@ module.exports = {
     getOneRecipeController,
     updateOneRecipeController,
     deleteOneRecipeController,
+    searchRecipeByNameController,
 };

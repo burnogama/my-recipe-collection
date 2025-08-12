@@ -1,8 +1,16 @@
 const controller = require("../utils/controllerHelper.js");
 const service = require("../services/ingredientsService.js");
-const { validateFound } = require("../utils/validationHelper.js");
+const { validateFound, validateRequiredFields } = require("../utils/validationHelper.js");
 
 const requiredFields = ["name"];
+
+//SEARCH by name
+async function getIngredientByNameController(req, res) {
+    validateRequiredFields(req.query, ["name"]);
+    const name = `%${req.query.name}%`;
+    const response = await controller.getAllController(service.searchIngredientByName, [name]);
+    controller.sendResponse(res, 200, response);
+}
 
 //POST
 async function createIngredientController(req, res) {
@@ -47,4 +55,5 @@ module.exports = {
     getOneIngredientController,
     updateOneIngredientController,
     deleteOneIngredientController,
+    getIngredientByNameController,
 };

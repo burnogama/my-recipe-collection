@@ -1,5 +1,5 @@
 const service = require("../services/recipesService.js");
-const { validateRequiredFields, validateFound } = require("../utils/validationHelper.js");
+const { validateRequiredFields } = require("../utils/validationHelper.js");
 
 function sendResponse(res, status, data) {
     res.status(status).json({ data });
@@ -13,8 +13,8 @@ async function insertController(body, serviceFunction, requiredFields) {
 }
 
 //GET
-async function getAllController(serviceFunction) {
-    const response = await serviceFunction();
+async function getAllController(serviceFunction, params = []) {
+    const response = await serviceFunction(params);
     return response;
 }
 
@@ -33,7 +33,7 @@ async function updateController(body, id, serviceFunction, requiredFields) {
 
 //DELETE :id
 async function deleteController(id, serviceFunction) {
-    const response = await service.deleteOneRecipe(id);
+    const response = await serviceFunction(id);
     return response;
 }
 

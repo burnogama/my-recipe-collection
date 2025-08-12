@@ -1,11 +1,11 @@
 const throwError = require("./errorHelper.js");
 
 // Check if all required fields exist and are not empty in the request body
-function validateRequiredFields(body, requiredFields) {
+function validateRequiredFields(source, requiredFields) {
     const missingFields = [];
 
     for (const field of requiredFields) {
-        if (!body[field]) missingFields.push(field); //Add missing fields to the missingFields array
+        if (!source[field] || source[field].toString().trim() === "") missingFields.push(field); //Add missing fields to the missingFields array
     }
 
     // if there are any missing fields throw an error 400 Bad Request

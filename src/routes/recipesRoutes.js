@@ -4,6 +4,11 @@ const { tryCatch } = require("../middleware/asyncHandler.js");
 const route = express.Router();
 
 const controller = require("../controllers/recipesController.js");
+
+//Rotas específicas
+route.get("/recipes/search", tryCatch(controller.searchRecipeByNameController));
+
+//CRUD Básico!!
 //POST
 route.post("/recipes", tryCatch(controller.createRecipeController));
 
