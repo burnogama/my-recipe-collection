@@ -1,13 +1,14 @@
 const controller = require("../utils/controllerHelper.js");
 const service = require("../services/recipes/recipesService.js");
-const { validateFound } = require("../utils/validationHelper.js");
+const { validateFound, validateRequiredFields } = require("../utils/validationHelper.js");
 
 const requiredFields = ["name", "yield_amount", "cost_price"];
 
 //SEARCH by name
 async function searchRecipeByNameController(req, res) {
+    validateRequiredFields(req.query, ["name"]);
     const name = `%${req.query.name}%`;
-    const response = await controller.getAllController(service.searchRecipeByName, [name]);
+    const response = await controller.getAllController(service.searchRecipe, [name]);
     controller.sendResponse(res, 200, response);
 }
 

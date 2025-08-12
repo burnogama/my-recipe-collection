@@ -4,6 +4,24 @@ const { sendResponse } = require("../utils/controllerHelper.js");
 
 const requiredFields = ["quantity", "unit"];
 
+//ROTAS mais específicas
+//SEARCH recipe by name
+async function searchRecipeController(req, res) {
+    validateRequiredFields(req.query, ["name"]);
+    const name = `%${req.query.name}%`;
+    const response = await riServices.searchRecipeByName(name);
+    sendResponse(res, 200, response);
+}
+
+//SEARCH ingredient by name
+async function searchIngredientController(req, res) {
+    validateRequiredFields(req.query, ["name"]);
+    const name = `%${req.query.name}%`;
+    const response = await riServices.searchRecipeIgredientByName(name);
+    sendResponse(res, 200, response);
+}
+
+//CRUD Básico
 //POST
 async function insertOneController(req, res) {
     validateRequiredFields(req.body, requiredFields);
@@ -11,7 +29,7 @@ async function insertOneController(req, res) {
     sendResponse(res, 201, response);
 }
 
-//GET
+//GET ingredients by recipe id
 async function getIngredientsByRecipeController(req, res) {
     const response = await riServices.getIngredientsByRecipeId(req.params.id);
     console.log("Response:", response);
@@ -19,8 +37,8 @@ async function getIngredientsByRecipeController(req, res) {
     sendResponse(res, 200, response);
 }
 
-//UPDATE
-async function updateOneRecipeIngredientController(req, res) {
+//UPDATE one recipe ingredient
+async function updateRecipeIngredientController(req, res) {
     const { recipeId, ingredientId } = req.params;
     validateRequiredFields(req.body, requiredFields);
     const response = await riServices.updateOneRecipeIngredient(req.body, recipeId, ingredientId);
@@ -28,8 +46,8 @@ async function updateOneRecipeIngredientController(req, res) {
     sendResponse(res, 200, response);
 }
 
-//DELETE
-async function deleteOneRecipeIngredientController(req, res) {
+//DELETE one recipe ingredient
+async function deleteRecipeIngredientController(req, res) {
     const { recipeId, ingredientId } = req.params;
     const response = await riServices.deleteIngredientFromRecipe(recipeId, ingredientId);
     validateFound(response, "Recipe/Ingredient");
@@ -39,6 +57,8 @@ async function deleteOneRecipeIngredientController(req, res) {
 module.exports = {
     insertOneController,
     getIngredientsByRecipeController,
-    updateOneRecipeIngredientController,
-    deleteOneRecipeIngredientController,
+    updateRecipeIngredientController,
+    deleteRecipeIngredientController,
+    searchRecipeController,
+    searchIngredientController,
 };

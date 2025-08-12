@@ -6,7 +6,7 @@ const QUERY = require("./recipesQuery.js");
 const bodyValues = ["name", "description", "yield_amount", "cost_price", "instructions", "notes"];
 
 //Rotas específicas
-function searchRecipeByName(nameArray) {
+function searchRecipe(nameArray) {
     return serviceHelper.getAllService(QUERY.searchbyName, nameArray);
 }
 
@@ -43,5 +43,5 @@ module.exports = {
     getRecipeById,
     updateOneRecipe,
     deleteOneRecipe,
-    searchRecipeByName,
+    searchRecipe,
 };

@@ -6,6 +6,18 @@ const QUERY = require("./recipe_ingredientsQuery.js");
 const createValues = ["recipe_id", "ingredient_id", "quantity", "unit"];
 const updateValues = ["quantity", "unit"];
 
+//ROTAS mais específicas
+async function searchRecipeByName(name) {
+    const res = await pool.query(QUERY.searchByRecipeName, [name]);
+    return res.rows;
+}
+
+async function searchRecipeIgredientByName(name) {
+    const res = await pool.query(QUERY.searchByIngredientName, [name]);
+    return res.rows;
+}
+
+//CRUD Básico
 //POST
 async function addIngredientToRecipe(body) {
     const values = extractValues(createValues, body);
@@ -38,4 +50,6 @@ module.exports = {
     getIngredientsByRecipeId,
     updateOneRecipeIngredient,
     deleteIngredientFromRecipe,
+    searchRecipeByName,
+    searchRecipeIgredientByName,
 };
